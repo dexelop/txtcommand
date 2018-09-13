@@ -2,6 +2,8 @@ from tkinter import *
 from tkinter.filedialog import askopenfilename
 from tkinter.messagebox import showerror
 import tkinter.scrolledtext as tkst
+import requests
+
 
 class MyFrame(Frame):
     def __init__(self):
@@ -13,7 +15,7 @@ class MyFrame(Frame):
 
         # 지워도 됩니다. 레이블 연습용
         self.label_hello = Label(self, text='hello')
-        self.label_hello.grid(row=1, column=5, sticky=E)
+        self.label_hello.grid(row=1, column=12, sticky=E)
 
         # 버튼 for 파일 탐색기 실행
         self.btn_fileopen = Button(self, text="파일탐색", command=self.load_file, width=10)
@@ -23,13 +25,14 @@ class MyFrame(Frame):
         
         # 리스트 박스 (명령어)
         self.listbox = Listbox()
-        self.listbox.insert(0, "1번")
-        self.listbox.insert(1, "2번")
-        self.listbox.insert(2, "3번")
-        self.listbox.insert(3, "4번")
-        self.listbox.insert(4, "5번")
+        self.listbox.insert(0, "{{EnterKey}}")
+        self.listbox.insert(1, "{{SpaceBar}}")
+        self.listbox.insert(2, "{{MoveToRight}}")
+        self.listbox.insert(3, "{{MoveToLeft}}")
+        self.listbox.insert(4, "{{MoveToUp}}")
+        self.listbox.insert(5, "{{MoveToDown}}")
         # self.listbox.delete(1, 2)
-        self.listbox.grid(row=2,column=0, sticky=W)
+        self.listbox.grid(row=12,column=0, sticky=W)
 
         # 버튼 for 리스트 박스 중에 골라서 스크롤 텍스트에 넣기 위함
         self.btn_1 = Button(self, text="추가", command=self.write_to_scrt, width=10)
@@ -40,6 +43,8 @@ class MyFrame(Frame):
         self.scrt.grid(column=0, row=2, columnspan=3)
         self.scrt.focus_set()                                                # Default focus
 
+        self.btn_delete_scrt = Button(self, text="삭제하기", command=self.delete_from_scrt, width=10)
+        self.btn_delete_scrt.grid(row=10, column=1, sticky=E)
 
     # 파일 탐색창 열기 link to btn_fileopen
     def load_file(self):
@@ -66,10 +71,15 @@ class MyFrame(Frame):
     def print_a_list(self):
         print(self.a_list)
 
+    # 스크롤 텍스트에 입력 추가 하기
     def write_to_scrt(self):
-        value=str((self.listbox.get(ACTIVE)))+'!'
+        value=str((self.listbox.get(ACTIVE)))+'\n'
         self.scrt.insert(INSERT, value)                    # insert text in a scrolledtext
         self.scrt.see(END)
+
+    # 스크롤 텍스트에 삭제 하기
+    def delete_from_scrt(self,):
+        self.scrt.delete(1.0, END)
 
 
 if __name__ == "__main__":
