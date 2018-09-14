@@ -22,15 +22,15 @@ class MyFrame(Frame):
         self.btn_fileopen.grid(row=1, column=0, sticky=W)
 
         self.a_list = []
-        
+
         # 리스트 박스 (명령어)
         self.listbox = Listbox()
-        self.listbox.insert(0, "{{EnterKey}}")
-        self.listbox.insert(1, "{{SpaceBar}}")
-        self.listbox.insert(2, "{{MoveToRight}}")
-        self.listbox.insert(3, "{{MoveToLeft}}")
-        self.listbox.insert(4, "{{MoveToUp}}")
-        self.listbox.insert(5, "{{MoveToDown}}")
+        self.listbox.insert(0, "{{EnterKey()}}")
+        self.listbox.insert(1, "{{SpaceBar()}}")
+        self.listbox.insert(2, "{{MoveToRight()}}")
+        self.listbox.insert(3, "{{MoveToLeft()}}")
+        self.listbox.insert(4, "{{MoveToUp()}}")
+        self.listbox.insert(5, "{{MoveToDown()}}")
         # self.listbox.delete(1, 2)
         self.listbox.grid(row=12,column=0, sticky=W)
 
@@ -45,6 +45,18 @@ class MyFrame(Frame):
 
         self.btn_delete_scrt = Button(self, text="삭제하기", command=self.delete_from_scrt, width=10)
         self.btn_delete_scrt.grid(row=10, column=1, sticky=E)
+        
+        # 엑셀파일 읽는 시작과 끝 행 넘버
+        self.start_rows = StringVar()
+        self.lbl_start = Label(self, text='시작 라인').grid(row=5, column=2)
+        self.ent_start =  Entry(self, textvariable=self.start_rows).grid(row=6, column=2)
+
+        self.end_rows = StringVar()
+        self.lbl_end = Label(self, text='끝 라인').grid(row=5, column=3)
+        self.ent_end =  Entry(self,textvariable=self.end_rows).grid(row=6, column=3)
+
+        self.btn_range = Button(self, text='영역추가', command=self.write_to_scrt_fron_entry, width=10).grid(row=6, column=4)
+
 
     # 파일 탐색창 열기 link to btn_fileopen
     def load_file(self):
@@ -80,6 +92,11 @@ class MyFrame(Frame):
     # 스크롤 텍스트에 삭제 하기
     def delete_from_scrt(self,):
         self.scrt.delete(1.0, END)
+
+    def write_to_scrt_fron_entry(self):
+        start = self.start_rows.get()
+        end = self.end_rows.get()
+        print(1)
 
 
 if __name__ == "__main__":
