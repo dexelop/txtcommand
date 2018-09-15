@@ -19,9 +19,11 @@ from openpyxl.utils import coordinate_from_string, column_index_from_string
 # col = column_index_from_string(xy[0]) # returns 1
 # row = xy[1]
 
+filename = 'sample.txt'
+
 
 class DoReMi():
-    def __init__(self, filename="sample.txt"):
+    def __init__(self, filename=filename):
         with open(filename, 'r+') as f:
             self.func_list = f.readlines()
             print('range는 ' + self.func_list[0].strip('\n')+ ' 입니다.')

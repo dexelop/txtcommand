@@ -1,5 +1,5 @@
-간단한 설명입니다. type("꼭 따옴표 쓰셔야 합니다")
-아시겠지요?
+do it free
+let's get it!
 a1:c30
 {{mi()}}
 Mi
