@@ -33,8 +33,9 @@ def btn_add_range_func():
         s = int(s)
         e = int(e)
         if e > s:
-            print(str(s))
-            print(str(e))
+            pass
+            # print(str(s))
+            # print(str(e))
             # btn_copy_cell.configure(state='normal')
             # btn_command_toscrt.configure(state='normal')
             # btn_add_range.configure(state='normal')#'disabled')
@@ -105,21 +106,21 @@ def btn_save_txt_func():
         pass
 
 
-btn_openxls = Button(win, text='Open xlsx file', command=btn_openxlsx_func, width=50)
+btn_openxls = Button(win, text='Open xlsx file', command=btn_openxlsx_func, width=30)
 btn_openxls.grid(row=0, column=0, columnspan=3)#, sticky=W)
 ###
 
-lbl_start = Label(win, text='시작행 번호').grid(row=1, column=0)
+lbl_start = Label(win, text='시작행 번호', width=10).grid(row=1, column=0)
 ent_start_value = StringVar()
 ent_start = Entry(win, textvariable=ent_start_value, width=10).grid(row=2, column=0)
 ###
 
-lbl_end = Label(win, text='끝 행 번호').grid(row=1, column=1)
+lbl_end = Label(win, text='끝 행 번호', width=10).grid(row=1, column=1)
 ent_end_value = StringVar()
-ent_end = Entry(win, textvariable=ent_end_value).grid(row=2, column=1) #, sticky=W)
+ent_end = Entry(win, textvariable=ent_end_value, width=10).grid(row=2, column=1) #, sticky=W)
 ###
 
-btn_add_range = Button(win, text="행 범위 선택 추가", command=btn_add_range_func)#, width=30)
+btn_add_range = Button(win, text="행 범위 선택 추가", command=btn_add_range_func, width=10)#, width=30)
 btn_add_range.grid(row=2, column=2)#, columnspan=2)
 ###
 
@@ -127,25 +128,25 @@ lbl_info = Label(win, text=" 아래 세가지 옵션 중 선택하세요 ")
 lbl_info.grid(row=4, column=0, columnspan=3)
 
 ###
-lbl_command = Label(win, text="명령어 선택 ")
+lbl_command = Label(win, text="명령어 선택 ", width=10)
 lbl_command.grid(row=5, column=0)
 combo_command_str = StringVar()
-combo_command = ttk.Combobox(win, textvariable=combo_command_str, state='readonly')# width=15
+combo_command = ttk.Combobox(win, textvariable=combo_command_str, width=10, state='readonly')# width=15
 combo_command['values'] = ('명령을 선택','apple', 'banana', 'pineapple', 'pear')
 combo_command.grid(row=6, column=0)
 combo_command.current(0)
-btn_command_toscrt = Button(win, text='명령 추가', command=btn_command_toscrt_func, state='normal')#''disabled')
+btn_command_toscrt = Button(win, text='명령 추가', command=btn_command_toscrt_func, width=10, state='normal')#''disabled')
 btn_command_toscrt.grid(row=7, column=0)
 ###
 
-lbl_copy_cell = Label(win, text="| 복사할 Column 입력 ")
+lbl_copy_cell = Label(win, text="복사할 Cell ", width=10)
 lbl_copy_cell.grid(row=5, column=1)
 combo_copy_cell_str = StringVar()
-combo_copy_cell = ttk.Combobox(win, textvariable=combo_copy_cell_str, state='readonly')# width=15
+combo_copy_cell = ttk.Combobox(win, textvariable=combo_copy_cell_str, width=10, state='readonly')# width=15
 combo_copy_cell['values'] = ('복사할 셀 선택','A', 'B', 'C', 'D', 'E', 'F','G','H','I','J', 'K', 'L', 'M')
 combo_copy_cell.grid(row=6, column=1)
 combo_copy_cell.current(0)
-btn_copy_cell = Button(win, text='복사할 컬럼 추가', command=btn_copy_cell_func, state='normal')#''disabled')
+btn_copy_cell = Button(win, text='복사할 컬럼 추가', command=btn_copy_cell_func, width=10, state='normal')#''disabled')
 btn_copy_cell.grid(row=7, column=1)
 # ent_copy_column_value = StringVar()
 # ent_copy_column = Entry(win, textvariable=ent_copy_column_value).grid(row=6, column=1)
@@ -153,26 +154,26 @@ btn_copy_cell.grid(row=7, column=1)
 # btn_copy_column.grid(row=7, column=1)
 ###
 
-lbl_typing = Label(win, text="| 입력할 값 수동 입력")
+lbl_typing = Label(win, text="수동 입력 값", width=10)
 lbl_typing.grid(row=5, column=2)
 ent_typing_value = StringVar()
-ent_typing = Entry(win, textvariable=ent_typing_value).grid(row=6, column=2)
-btn_typing = Button(win, text='Typing', command=btn_typing_func, state='normal')
+ent_typing = Entry(win, textvariable=ent_typing_value, width=10).grid(row=6, column=2)
+btn_typing = Button(win, text='Typing', command=btn_typing_func, width=10, state='normal')
 btn_typing.grid(row=7, column=2)
 ###
 
-scrt = tkst.ScrolledText(win, height=10, wrap=WORD)  # , width=50 Create a scrolledtext
+scrt = tkst.ScrolledText(win, height=10, width=30, wrap=WORD)  # , width=50 Create a scrolledtext
 scrt.grid(row=8, column=0, columnspan=3, sticky=W+E)#columnspan=3)
 # scrt.focus_set()  # Default focus
 ###
 
-btn_delete_scrt = Button(win, text="삭제하기", command=delete_from_scrt)#, width=10)
+btn_delete_scrt = Button(win, text="삭제하기", command=delete_from_scrt, width=10)#, width=10)
 btn_delete_scrt.grid(row=10, column=1, sticky=E)
 
-btn_open_txt = Button(win, text='불러오기', command=btn_open_txt_func)
+btn_open_txt = Button(win, text='불러오기', command=btn_open_txt_func, width=10)
 btn_open_txt.grid(row=10, column=0)
 
-btn_save_txt = Button(win, text='저장하기', command=btn_save_txt_func)
+btn_save_txt = Button(win, text='저장하기', command=btn_save_txt_func, width=10)
 btn_save_txt.grid(row=10, column=2)
 
 
@@ -193,11 +194,24 @@ def btn_mouse_pos_func():
 
 
 lbl_mouse_pos_value = StringVar()
-lbl_mouse_pos_value.set('우측 실행 버튼을 누르고 최초 지점 마우스 클릭')
-lbl_mouse_pos = Label(win, textvariable=lbl_mouse_pos_value)
+lbl_mouse_pos_value.set('좌표')
+lbl_mouse_pos = Label(win, textvariable=lbl_mouse_pos_value, width=10)
 lbl_mouse_pos.grid(row=11, column=0)
-btn_mouse_pos = Button(win, text='누르고 마우스이동', command=btn_mouse_pos_func)
+btn_mouse_pos = Button(win, text='좌표 받기', command=btn_mouse_pos_func, width=10)
 btn_mouse_pos.grid(row=11, column=1)
+
+
+import pyautogui as pa
+
+
+def btn_run_func():
+    pos = lbl_mouse_pos_value.get()
+    x = int(pos.split(':')[0])
+    y = int(pos.split(':')[1])
+    pa.click(x,y)
+
+btn_run = Button(win, text='실행',command=btn_run_func, bg='red')
+btn_run.grid(row=11, column=2)
 
 
 win.mainloop()
