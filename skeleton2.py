@@ -77,6 +77,15 @@ def btn_typing_func():
         scrt.insert(INSERT, '\n')
 
 
+def btn_pos_add_func():
+    text = lbl_pos_value.get()
+    if text == '좌표':
+        pass
+    else:
+        scrt.insert(INSERT, text)
+        scrt.insert(INSERT, '\n')
+
+
 def delete_from_scrt():
     scrt.delete(1.0, END)
 
@@ -106,26 +115,30 @@ def btn_save_txt_func():
         pass
 
 
-btn_openxls = Button(win, text='Open xlsx file', command=btn_openxlsx_func, width=30)
-btn_openxls.grid(row=0, column=0, columnspan=3)#, sticky=W)
+lbl_hi = Label(win, text='환영합니다요')
+lbl_hi.grid(row=0, column=0, columnspan=4)
+
+
+btn_openxls = Button(win, text='Open xlsx file', command=btn_openxlsx_func, width=10)
+btn_openxls.grid(row=1, column=0, rowspan=2)#, sticky=W)
 ###
 
-lbl_start = Label(win, text='시작행 번호', width=10).grid(row=1, column=0)
+lbl_start = Label(win, text='시작행 번호', width=10).grid(row=1, column=1)
 ent_start_value = StringVar()
-ent_start = Entry(win, textvariable=ent_start_value, width=10).grid(row=2, column=0)
+ent_start = Entry(win, textvariable=ent_start_value, width=10).grid(row=2, column=1)
 ###
 
-lbl_end = Label(win, text='끝 행 번호', width=10).grid(row=1, column=1)
+lbl_end = Label(win, text='끝 행 번호', width=10).grid(row=1, column=2)
 ent_end_value = StringVar()
-ent_end = Entry(win, textvariable=ent_end_value, width=10).grid(row=2, column=1) #, sticky=W)
+ent_end = Entry(win, textvariable=ent_end_value, width=10).grid(row=2, column=2) #, sticky=W)
 ###
 
 btn_add_range = Button(win, text="행 범위 선택 추가", command=btn_add_range_func, width=10)#, width=30)
-btn_add_range.grid(row=2, column=2)#, columnspan=2)
+btn_add_range.grid(row=2, column=3)#, columnspan=2)
 ###
 
-lbl_info = Label(win, text=" 아래 세가지 옵션 중 선택하세요 ")
-lbl_info.grid(row=4, column=0, columnspan=3)
+lbl_info = Label(win, text=" 아래 네 가지 옵션 중 선택하세요 ")
+lbl_info.grid(row=4, column=0, columnspan=4)
 
 ###
 lbl_command = Label(win, text="명령어 선택 ", width=10)
@@ -181,37 +194,38 @@ from pymouse import PyMouse
 import time
 
 
-def btn_mouse_pos_func():
+def btn_pos_func():
     m = PyMouse()
     pos = m.position()
     time.sleep(0.8)
     pos2 = m.position()
     if pos == pos2:
         pos_str = str(int(pos[0])) + ':' + str(int(pos[1]))
-        lbl_mouse_pos_value.set(pos_str)
+        lbl_pos_value.set(pos_str)
     else:
-        btn_mouse_pos_func()
+        btn_pos_func()
 
 
-lbl_mouse_pos_value = StringVar()
-lbl_mouse_pos_value.set('좌표')
-lbl_mouse_pos = Label(win, textvariable=lbl_mouse_pos_value, width=10)
-lbl_mouse_pos.grid(row=11, column=0)
-btn_mouse_pos = Button(win, text='좌표 받기', command=btn_mouse_pos_func, width=10)
-btn_mouse_pos.grid(row=11, column=1)
+lbl_pos_value = StringVar()
+lbl_pos_value.set('좌표')
+lbl_pos = Label(win, textvariable=lbl_pos_value, width=10)
+lbl_pos.grid(row=5, column=3)
+btn_pos = Button(win, text='좌표 받기', command=btn_pos_func, width=10)
+btn_pos.grid(row=6, column=3)
+btn_pos_add = Button(win, text='좌표 추가', command=btn_pos_add_func, width=10)
+btn_pos_add.grid(row=7, column=3)
 
 
-import pyautogui as pa
+# import pyautogui as pa
+#
+#
+# def btn_pos_add_func():
+#     pos = lbl_pos_value.get()
+#     x = int(pos.split(':')[0])
+#     y = int(pos.split(':')[1])
+#     pa.click(x,y)
 
 
-def btn_run_func():
-    pos = lbl_mouse_pos_value.get()
-    x = int(pos.split(':')[0])
-    y = int(pos.split(':')[1])
-    pa.click(x,y)
-
-btn_run = Button(win, text='실행',command=btn_run_func, bg='red')
-btn_run.grid(row=11, column=2)
 
 
 win.mainloop()
