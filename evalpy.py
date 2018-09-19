@@ -73,19 +73,49 @@ class DoReMi():
         print("구현해야 할 함수는 \n"
               "enter, spacebar, type, ctrl_v")
 
-    def pos_click(self):
-        print('I clicked!, TODO : get POS, and when you start program  move to POS and click')
+    def click(self, pos_x, pos_y):
+        print('I clicked!,'+pos_x+pos_y)
 
     def ctrl_v(self, pos):
         print(pos.value)
 
-    def enterkey(self, times=1):
+    def enter(self, times=1):
         for i in range(times):
             print('Hit enterKey!')
             i+=1
 
+    def spacebar(self, times=1):
+        for i in range(times):
+            print('Hit spacebar!')
+            i+=1
+
+    def sleep(self, times=1):
+        for i in range(times):
+            print('Sleep')
+            i+=1
+
+    def movetoright(self, times=1):
+        for i in range(times):
+            print('Hit move to right!')
+            i+=1
+
+    def movetoleft(self, times=1):
+        for i in range(times):
+            print('Hit move to left!')
+            i+=1
+
+    def movetoup(self, times=1):
+        for i in range(times):
+            print('Hit move to up!')
+            i+=1
+
+    def movetodown(self, times=1):
+        for i in range(times):
+            print('Hit move to down')
+            i+=1
+
     def type(self, t):
-        print(t)
+        print(t+'를 입력하셨습니다.')
 
     def run_func(self):
         for func in self.func_list:

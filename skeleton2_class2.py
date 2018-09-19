@@ -46,7 +46,7 @@ class MyFrame(Frame):
         self.lbl_command.grid(row=5, column=0)
         self.combo_command_str = StringVar()
         self.combo_command = ttk.Combobox(self, textvariable=self.combo_command_str, width=10, state='readonly')  # width=15
-        self.combo_command['values'] = ('명령을 선택', '{{Enter()}}', '{{SpaceBar()}}',"{{Sleep()}}", "{{MoveToRight()}}", "{{MoveToLeft()}}", "{{MoveToUp()}}", "{{MoveToDown()}}")
+        self.combo_command['values'] = ('명령을 선택', '{{Enter()}}', '{{SpaceBar()}}', "{{Sleep()}}", "{{MoveToRight()}}", "{{MoveToLeft()}}", "{{MoveToUp()}}", "{{MoveToDown()}}")
         self.combo_command.grid(row=6, column=0)
         self.combo_command.current(0)
         self.btn_command_toscrt = Button(self, text='명령 추가', command=self.btn_command_toscrt_func, width=10,
@@ -125,6 +125,7 @@ class MyFrame(Frame):
             e = int(e)
             if e > s:
                 # print(self.fname)
+                self.btn_add_range.configure(text='범위 추가 완료')
                 pass
                 # print(str(s))
                 # print(str(e))
@@ -153,6 +154,7 @@ class MyFrame(Frame):
         if text == self.combo_copy_cell['values'][0]:
             pass
         else:
+            text = '{{CopyAndPaste('+text+')}}'
             self.scrt.insert(INSERT, text)
             self.scrt.insert(INSERT, '\n')
             self.combo_copy_cell.current(0)
@@ -162,6 +164,7 @@ class MyFrame(Frame):
         if text == '':
             pass
         else:
+            text = '{{Type('+text+')}}'
             self.scrt.insert(INSERT, text)
             self.scrt.insert(INSERT, '\n')
 
@@ -170,6 +173,9 @@ class MyFrame(Frame):
         if text == '좌표':
             pass
         else:
+            pos_x = text.split(":")[0]
+            pos_y = text.split(":")[1]
+            text = '{{CLick('+pos_x + ','+pos_y+')}}'
             self.scrt.insert(INSERT, text)
             self.scrt.insert(INSERT, '\n')
 
@@ -214,12 +220,4 @@ class MyFrame(Frame):
 if __name__ == "__main__":
     MyFrame().mainloop()
 
-# import pyautogui as pa
-#
-#
-# def btn_pos_add_func():
-#     pos = lbl_pos_value.get()
-#     x = int(pos.split(':')[0])
-#     y = int(pos.split(':')[1])
-#     pa.click(x,y)
 
