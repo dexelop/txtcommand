@@ -7,6 +7,7 @@ import requests
 from evalpy import DoReMi
 from pymouse import PyMouse
 import time
+import action
 
 
 class MyFrame(Frame):
@@ -101,6 +102,9 @@ class MyFrame(Frame):
         self.btn_pos_add = Button(self, text='좌표 추가', command=self.btn_pos_add_func, width=10)
         self.btn_pos_add.grid(row=7, column=3)
 
+        self.btn_run = Button(self, text='실행', command=self.btn_run_func, width=10)
+        self.btn_run.grid(row=7, column=4)
+
     def btn_openxlsx_func(self):
         fname = askopenfilename(filetypes=(
             # ("Template files", "*.tplate"),
@@ -154,7 +158,7 @@ class MyFrame(Frame):
         if text == self.combo_copy_cell['values'][0]:
             pass
         else:
-            text = '{{CopyAndPaste('+text+')}}'
+            text = '{{CopyAndPaste("'+text+'")}}'
             self.scrt.insert(INSERT, text)
             self.scrt.insert(INSERT, '\n')
             self.combo_copy_cell.current(0)
@@ -164,7 +168,7 @@ class MyFrame(Frame):
         if text == '':
             pass
         else:
-            text = '{{Type('+text+')}}'
+            text = '{{Type("'+text+'")}}'
             self.scrt.insert(INSERT, text)
             self.scrt.insert(INSERT, '\n')
 
@@ -215,6 +219,12 @@ class MyFrame(Frame):
             self.lbl_pos_value.set(pos_str)
         else:
             self.btn_pos_func()
+
+    def btn_run_func(self):
+        text2save = str(self.scrt.get(0.0, END))
+        # print(text2save)
+        act = action.MyAction()
+        act.run_func(text2save)
 
 
 if __name__ == "__main__":
