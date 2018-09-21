@@ -14,7 +14,7 @@ import openpyxl
 class MyFrame(Frame, MyAction):
     def __init__(self):
         Frame.__init__(self, height=510, width=770)#, bg='red')
-        self.fname = ''
+        self.fname = None
         self.master.title("Hello Title By SeoChanYoung")
         self.master.rowconfigure(10)
         self.master.columnconfigure(10)
@@ -111,7 +111,6 @@ class MyFrame(Frame, MyAction):
         self.btn_run.grid(row=10, column=3)
 
     def btn_openxlsx_func(self):
-        fname = ''
         fname = askopenfilename(filetypes=(
             # ("Template files", "*.tplate"),
             # ("HTML files", "*.html;*.htm"),
@@ -235,7 +234,7 @@ class MyFrame(Frame, MyAction):
     def btn_run_func(self):
         # print(self.fname)
         text2save = str(self.scrt.get(0.0, END))
-        if self.fname != '' :
+        if self.fname :
             fname = self.fname
             book = openpyxl.load_workbook(filename=fname, data_only=True)
             sheet = book.active

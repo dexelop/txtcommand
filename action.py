@@ -46,10 +46,11 @@ class MyAction():
             print('Hit move to down')
             i+=1
 
-    def copyandpaste(self, column, i=1):
-        print(column)
-        print(i)
+    def copyandpaste(self,sheet, column, i=1):
+        # print(column)
+        # print(i)
         print(column+str(i))
+        print(sheet["a"+str(i)].value)
 
     def type(self, t):
         print(t+'를 입력하셨습니다.')
