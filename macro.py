@@ -169,7 +169,7 @@ class MyFrame(Frame, MyAction):
         if text == self.combo_copy_cell['values'][0]:
             pass
         else:
-            text = '{{CopyAndPaste(sheet,"'+text+'")}}'
+            text = '{{CopyAndPaste(sheet, "'+text+'", i)}}'
             self.scrt.insert(INSERT, text)
             self.scrt.insert(INSERT, '\n')
             self.combo_copy_cell.current(0)
@@ -239,10 +239,10 @@ class MyFrame(Frame, MyAction):
             book = openpyxl.load_workbook(filename=fname, data_only=True)
             sheet = book.active
             for i in range(self.s, self.e):
-                action.MyAction().run_func(text2save)
+                action.MyAction().run_func(text2save, sheet, i)
         else:
             for i in range(self.s, self.e):
-                action.MyAction().run_func(text2save)
+                action.MyAction().run_func(text2save, i)
 
             # print(self.s, self.e)
             # print(sheet["a"+str(self.s)].value)

@@ -1,7 +1,5 @@
 import openpyxl
 from openpyxl.utils import coordinate_from_string, column_index_from_string
-import pyautogui as pa
-from time import sleep
 
 
 class MyAction():
@@ -10,73 +8,52 @@ class MyAction():
 
     def enter(self, times=1):
         for i in range(times):
-            pa.hotkey("enter")
-            print('Hit enter!')
-            sleep(0.1)
+            print('Hit enterKey!')
             i+=1
 
     def spacebar(self, times=1):
         for i in range(times):
-            pa.hotkey("space")
             print('Hit spacebar!')
-            sleep(0.1)
             i+=1
 
     def sleep(self, times=1):
-        sleep(times)
-        print('Sleep')
+        for i in range(times):
+            print('Sleep')
+            i+=1
 
     def movetoright(self, times=1):
         for i in range(times):
-            pa.hotkey("right")
             print('Hit move to right!')
-            sleep(0.1)
             i+=1
 
     def movetoleft(self, times=1):
         for i in range(times):
-            pa.hotkey("left")
             print('Hit move to left!')
-            sleep(0.1)
             i+=1
 
     def movetoup(self, times=1):
         for i in range(times):
-            pa.hotkey("up")
             print('Hit move to up!')
-            sleep(0.1)
             i+=1
 
     def movetodown(self, times=1):
         for i in range(times):
-            pa.hotkey("down")
             print('Hit move to down')
-            sleep(0.1)
             i+=1
 
-    def copyandpaste(self, sheet, column, i=1):
-        # print(column+str(i))
-        # print(sheet[column+str(i)].value)
-        pa.typewrite(sheet[column + str(i)].value)
-        print("copyandpaste is Work!")
-        sleep(0.1)
+    def copyandpaste(self,sheet, column, i=1):
+        # print(column)
+        # print(i)
+        print(column+str(i))
+        print(sheet["a"+str(i)].value)
 
     def type(self, t):
-        pa.typewrite(t)
         print(t+'를 입력하셨습니다.')
-        sleep(0.1)
 
     def click(self, pos_x, pos_y):
-        pa.click(pos_x, pos_y)
         print(+pos_x+pos_y)
-        sleep(0.1)
 
-    def move_to(self, pos_x, pos_y):
-        pa.moveTo(pos_x, pos_y, duration=0.3)
-        print('Move! Move!')
-        sleep(0.1)
-
-    def run_func(self, scrt_text, sheet=None, i=None):
+    def run_func(self, scrt_text):
         scrt_text = scrt_text.split("\n")
         # print(scrt_text)
         for func in scrt_text:
