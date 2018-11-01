@@ -144,7 +144,7 @@ class MyFrame(Frame, MyAction):
 
     def btn_pw_func(self):
         pw = requests.get('http://ctascy.dothome.co.kr/pw.txt').text
-        print(self.ent_pw_value.get())
+        # print(self.ent_pw_value.get())
         if self.ent_pw_value.get()==pw:
             self.btn_run.configure(state='normal')
 
@@ -234,7 +234,7 @@ class MyFrame(Frame, MyAction):
             try:
                 with open(fname, 'r+') as f:
                     text = f.readlines()
-                    print(text)
+                    # print(text)
                     for t in text:
                         self.scrt.insert(INSERT, t)
             except:  # <- naked except is a bad idea

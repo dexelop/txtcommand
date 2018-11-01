@@ -12,45 +12,45 @@ class MyAction():
     def enter(self, times=1):
         for i in range(times):
             pa.hotkey("enter")
-            print('Hit enter!')
+            # print('Hit enter!')
             sleep(0.3)
             i+=1
 
     def spacebar(self, times=1):
         for i in range(times):
             pa.hotkey("space")
-            print('Hit spacebar!')
+            # print('Hit spacebar!')
             sleep(0.3)
             i+=1
 
     def sleep(self, times=1):
         sleep(times)
-        print('Sleep')
+        # print('Sleep')
 
     def movetoright(self, times=1):
         for i in range(times):
             pa.hotkey("right")
-            print('Hit move to right!')
+            # print('Hit move to right!')
             sleep(0.3)
             i+=1
     def movetoleft(self, times=1):
         for i in range(times):
             pa.hotkey("left")
-            print('Hit move to left!')
+            # print('Hit move to left!')
             sleep(0.3)
             i+=1
 
     def movetoup(self, times=1):
         for i in range(times):
             pa.hotkey("up")
-            print('Hit move to up!')
+            # print('Hit move to up!')
             sleep(0.3)
             i+=1
 
     def movetodown(self, times=1):
         for i in range(times):
             pa.hotkey("down")
-            print('Hit move to down')
+            # print('Hit move to down')
             sleep(0.3)
             i+=1
 
@@ -60,27 +60,28 @@ class MyAction():
         # pa.typewrite(sheet[column + str(i)].value)
         pyperclip.copy(sheet[column + str(i)].value)
         pa.hotkey('ctrl','v')
-        print("copyandpaste is Work!")
+        # print("copyandpaste is Work!")
         sleep(0.3)
 
     def type(self, t):
         pyperclip.copy(t)
         pa.hotkey('ctrl', 'v')
-        print(t+'를 입력하셨습니다.')
+        # print(t+'를 입력하셨습니다.')
         sleep(0.3)
 
     def click(self, pos_x, pos_y):
         pa.click(pos_x, pos_y)
-        print(str(pos_x)+","+str(pos_y))
+        # print(str(pos_x)+","+str(pos_y))
         sleep(0.3)
 
     def move_to(self, pos_x, pos_y):
         pa.moveTo(pos_x, pos_y, duration=0.3)
-        print('Move! Move!')
+        # print('Move! Move!')
         sleep(0.3)
 
     def passing(self):
-        print('Say Pass!!!')
+        # print('Say Pass!!!')
+        pass
 
     def run_func(self, scrt_text, sheet=None, index=None):
         scrt_text = scrt_text.split("\n")
@@ -95,20 +96,22 @@ class MyAction():
             if func.startswith('{{') & func.endswith('}}'):
                 func = func[2:-2]
                 try:
-                    print('run self.{}'.format(func))
+                    # print('run self.{}'.format(func))
                     exec('self.' + func)
                     # exec('self.'+func + '()')
                 except:
-                    print(func+' 함수는 없습니다.')
+                    # print(func+' 함수는 없습니다.')
+                    pass
             elif func.startswith('[[') & func.endswith(']]'):
                 if index == 0:
                     # print(count)
-                    print('yeh it is ok')
+                    # print('yeh it is ok')
                     func = func[2:-2]
                     try:
                         exec('self.' + func)
                     except:
-                        print('붙여넣기 에러 발생')
+                        pass
+                        # print('붙여넣기 에러 발생')
             
         # print(func_list)
         # text2save = func_list
