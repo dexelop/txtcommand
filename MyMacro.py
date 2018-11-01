@@ -9,18 +9,21 @@ import time
 import action1
 from action1 import MyAction
 import openpyxl
-
+import requests
 
 class MyFrame(Frame, MyAction):
     def __init__(self):
         Frame.__init__(self, height=510, width=770)#, bg='red')
         self.fname = ''
-        self.master.title("Hello Title By SeoChanYoung")
+        self.master.title("서찬영 세무회계 사무소")
         self.master.rowconfigure(10)
         self.master.columnconfigure(10)
         self.grid(sticky=W+E+N+S)
 
-        self.lbl_hi = Label(self, text='환영합니다요')
+        self.hello_msg = requests.get('http://ctascy.dothome.co.kr/hello.txt')
+        self.hello_msg.encoding=None
+        self.hello_msg = self.hello_msg.text
+        self.lbl_hi = Label(self, text=self.hello_msg)
         self.lbl_hi.grid(row=0, column=0, columnspan=4)
 
         self.btn_openxls = Button(self, text='Open xlsx file', command=self.btn_openxlsx_func, width=10)
@@ -39,6 +42,12 @@ class MyFrame(Frame, MyAction):
         self.ent_end_value = StringVar()
         self.ent_end = Entry(self, textvariable=self.ent_end_value, width=10).grid(row=2, column=2)  # , sticky=W)
         ###
+
+        # self.lbl_pw = Label(self, text='Password', width=5).grid(row=1, column=3)
+        self.ent_pw_value = StringVar()
+        self.ent_pw = Entry(self, textvariable=self.ent_pw_value,show="*", width=5).grid(row=1, column=3)
+        self.btn_pw = Button(self, text="PW", command = self.btn_pw_func, width=5)
+        self.btn_pw.grid(row=1, column=4)
 
         self.btn_add_range = Button(self, text="행 범위 선택 추가", command=self.btn_add_range_func, width=10)  # , width=30)
         self.btn_add_range.grid(row=2, column=3)  # , columnspan=2)
@@ -99,17 +108,17 @@ class MyFrame(Frame, MyAction):
         self.btn_save_txt.grid(row=10, column=2)
 
         self.lbl_pos_value = StringVar()
-        self.lbl_pos_value.set('좌표')
+        self.lbl_pos_value.set('Click 하기')
         self.lbl_pos = Label(self, textvariable=self.lbl_pos_value, width=10)
         self.lbl_pos.grid(row=5, column=3)
         self.btn_pos = Button(self, text='좌표 받기', command=self.btn_pos_func, width=10)
         self.btn_pos.grid(row=6, column=3)
         self.btn_pos_add_once = Button(self, text='좌표 한번만추가', command=self.btn_pos_add_once_func, width=5)
         self.btn_pos_add_once.grid(row=7, column=3)
-        self.btn_pos_add = Button(self, text='좌표 추가', command=self.btn_pos_add_func, width=5)
+        self.btn_pos_add = Button(self, text='좌표 추가', command=self.btn_pos_add_func, width=8)
         self.btn_pos_add.grid(row=7, column=4)
         
-        self.btn_run = Button(self, text='실행', command=self.btn_run_func, width=10)
+        self.btn_run = Button(self, text='실행', command=self.btn_run_func, width=10, state='disabled')
         self.btn_run.grid(row=10, column=3)
 
     def btn_openxlsx_func(self):
@@ -131,6 +140,13 @@ class MyFrame(Frame, MyAction):
 
     def btn_noxls_func(self):
         pass
+
+
+    def btn_pw_func(self):
+        pw = requests.get('http://ctascy.dothome.co.kr/pw.txt').text
+        print(self.ent_pw_value.get())
+        if self.ent_pw_value.get()==pw:
+            self.btn_run.configure(state='normal')
 
     def btn_add_range_func(self):
         s = self.ent_start_value.get()
@@ -255,8 +271,8 @@ class MyFrame(Frame, MyAction):
             for i in range(self.s, self.e):
                 action1.MyAction().run_func(text2save)
         else:
-            for i in range(self.s, self.e):
-                action1.MyAction().run_func(text2save)
+            for index, i in enumerate(range(self.s, self.e)):
+                action1.MyAction().run_func(text2save, index=index)
 
             # print(self.s, self.e)
             # print(sheet["a"+str(self.s)].value)
